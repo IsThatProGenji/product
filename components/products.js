@@ -8,14 +8,15 @@ import {
     Dimensions,
     FlatList,
     ImageBackground,
-    View
+    View,
+    Button
 } from 'react-native'
 import axios from 'axios'
 
-
 export default class products extends React.Component {
-
-
+    pressHandler() {
+        this.props.navigation.navigate('details')
+    }
     state = {
         productsImages: []
     }
@@ -35,18 +36,16 @@ export default class products extends React.Component {
                 {this.state.productsImages.map(products => <View style={{ flex: 1 }}>
                     <Text style={{ marginLeft: 200, marginTop: 20, position: 'absolute' }} >{products.name}</Text>
                     < Image source={{ uri: products.image }} style={{ height: 150, width: 150 }} />
+                    <Button
+                        title="Press me"
+                        color="#f194ff"
+                        onPress={() => this.props.navigation.navigate('details', products)}
+                    />
+
                 </View>)}
             </ScrollView >
         )
     }
 }
-const styles = StyleSheet.create({
-    pic: {
-        flex: 1,
-        width: Dimensions.get('window').width,
-        resizeMode: 'cover',
-        justifyContent: 'flex-end',
-        alignItems: 'flex-end'
-    },
 
-})
+
